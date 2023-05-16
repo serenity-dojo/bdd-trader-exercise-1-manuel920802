@@ -83,6 +83,5 @@ public class WhenCreatingANewClient {
                 .and().body("email",equalTo("kevin@malone.com"))
                 .and().body("firstName",equalTo("Kevin"))
                 .and().body("lastName",equalTo("Malone"));
-
     }
 }

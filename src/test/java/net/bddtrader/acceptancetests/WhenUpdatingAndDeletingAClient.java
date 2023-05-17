@@ -23,12 +23,10 @@ public class WhenUpdatingAndDeletingAClient {
         String id = aClientExists(Client.withFirstName("Pam").andLastName("Beasley").andEmail("pan@beasley.com"));
 
         //When I delete the client
-
         //.pathParam("id", id).delete("/client/{id}")
         RestAssured.given().delete("/client/{id}", id);
 
         //Then the client should no longer exist
-
         //.pathParam("id", id).get("/client/{id}")
         RestAssured.given()
                 .get("/client/{id}", id)

@@ -1,12 +1,18 @@
 package net.bddtrader.acceptancetests;
 
+
 import io.restassured.RestAssured;
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.serenitybdd.rest.Ensure;
+import net.serenitybdd.rest.SerenityRest;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.hamcrest.Matchers.*;
 
-public class JSONPathAssertionExercises {
+@RunWith(SerenityRunner.class)
+public class JSONPathAssertionExercisesWithSerenityBDD {
 
     @Before
     public void prepare_rest_api(){
@@ -16,9 +22,14 @@ public class JSONPathAssertionExercises {
     //GET method tests
     @Test
     public void find_a_simple_field_value(){
-        RestAssured.given().pathParam("symbol", "aapl")
-                .when().get("stock/{symbol}/company")
-                .then().body("industry", equalTo("Telecommunications Equipment"));
+        SerenityRest.given()
+                .pathParam("symbol", "aapl")
+                .when().get("stock/{symbol}/company");
+
+        Ensure.that("The industry is correctly defined",
+                response -> response.body("industry", equalTo("Telecommunications Equipment")))
+                .andThat("The exchange should be NASDAQ",
+                        response -> response.body("exchange", equalTo("NASDAQ")));
     }
 
     @Test

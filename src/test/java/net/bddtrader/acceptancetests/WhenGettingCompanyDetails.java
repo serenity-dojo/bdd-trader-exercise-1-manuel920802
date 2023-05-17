@@ -15,6 +15,18 @@ public class WhenGettingCompanyDetails {
         RestAssured.baseURI = "https://bddtrader.herokuapp.com/api";
     }
 
+    //Note:When authentication is needed from the API:
+
+    // Basic authentication: Passes credentials over the network (not very secure, use digest instead)
+    // Provide Username and Password: .auth().basic("user", "password")
+    // Send in the header of each request (this avoids an extra query): .auth().preemptive().basic("user", "password")
+
+    // Digest authentication: More secure than basic auth because it does not pass the real password over the network
+    // Provide Username and Password: auth().digest("user", "password")
+
+    // Form authentication: Using an HTML form to pass credentials
+    // Provide Username and Password: auth().form("user", "password" new FormAuthConfig("/j_spring_security_check", "j_username", "j_password"))
+
     @Test
     public void should_return_name_and_sector() {
         // we can use the param in the url : "/stock/aapl/company"

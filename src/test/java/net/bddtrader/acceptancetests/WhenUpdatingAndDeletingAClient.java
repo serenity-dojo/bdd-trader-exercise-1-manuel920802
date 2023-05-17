@@ -3,6 +3,8 @@ package net.bddtrader.acceptancetests;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import net.bddtrader.clients.Client;
+import net.serenitybdd.rest.SerenityRest;
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
